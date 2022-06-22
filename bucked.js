@@ -5,25 +5,27 @@ const orders = document.querySelectorAll('.wrap-position');
 const bill = document.querySelector('.sum');
 // надаємо початкове значення суми, тут буде зберігатися сума всіх наших позицій
 let sum = 0;
-//
-orders.forEach(el => {
+
+orders.forEach(wrapPosition => {
   //витягуєм .price з елемнту масиву orders diw шоб можна було оперувати цим дівом
-  const priceTag = el.querySelector('.price');
+  const priceTag = wrapPosition.querySelector('.price');
   // витягуєм .price з елемнту масиву orders перетворюємо вміст тегу в число
   const price = Number(priceTag.innerHTML);
   //витягує .counter і передає у змінну
-  const counter = el.querySelector('.counter');
-  //значення price додаємо в суму
-  sum += price;
-  //записусо в .sum текст
-  updateBillText(bill, sum);
+  const counter = wrapPosition.querySelector('.counter');
   //атрибути counter витягуємо і перетворюєм в число min та maxзначення
   const min = Number(counter.getAttribute('data-min'));
   const max = Number(counter.getAttribute('data-max'));
   // шукаємо в ounter .minus та .plus .count та записуємо у змінну
   const minusButtom = counter.querySelector('.minus');
   const plusButtom = counter.querySelector('.plus');
-  const count = counter.querySelector('.count');
+  const count = counter.querySelector('.count'); 
+
+  //значення price додаємо в суму
+  sum += price;
+  //записусо в .sum текст
+  updateBillText(bill, sum);
+
   // вішаємо лісенер на minus та plus
   plusButtom.addEventListener('click', () => {
     const value = Number(count.innerHTML) + 1;
@@ -34,7 +36,8 @@ orders.forEach(el => {
       updatePrice(priceTag, price, currnetPrice, (basePrice, currenPrice) => basePrice + currenPrice);
       updateBillText(bill, sum);
     };
-  })
+  });
+
   //аналогічно тільки -1
   minusButtom.addEventListener('click', () => {
     const value = Number(count.innerHTML) - 1;
