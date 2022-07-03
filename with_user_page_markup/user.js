@@ -10,14 +10,7 @@ const loadUserInfo = async () => {
 
 
    
-    // const userResponse = await fetch('https://jsonplaceholder.typicode.com/users/1');
-    // const userList = await userResponse.json();
 
-
-    // userList.forEach(() => {
-
-    // })
-    
      //article
     const articleEl = document.createElement('article');
     articleEl.classList.add('post_wrap');
@@ -31,9 +24,7 @@ const loadUserInfo = async () => {
     pTextName.classList.add('post_wrap-text');
     articleEl.appendChild(pTextName);
     pTextName.innerHTML = '<span>Username:</span> Bret';
-    // const pTextNameS= document.createElement('span');
-    // pTextNameS.innerText='Username:';
-    // pTextName.appendChild(pTextNameS);
+   
 
     //Email
     const pTextEmail = document.createElement('p');
@@ -86,6 +77,7 @@ const loadUserInfo = async () => {
     const todoResponse = await fetch('https://jsonplaceholder.typicode.com/todos?userId=1');
     const todoList = await todoResponse.json();
 
+    todoList.sort((todo1,todo2) => Number(todo1.completed) - Number(todo2.completed));
     todoList.forEach(eltodo => {
         const todoEL = document.createElement('div');
         todoEL.classList.add('todo_wrap');
@@ -124,10 +116,12 @@ const loadUserInfo = async () => {
         albumSpan.innerHTML = albumTitle;
         albumATag.appendChild(albumSpan);
         albumsWrap.appendChild(albumATag);
+         
 
     });
-
-    albums.appendChild(albumsWrap);
+    albumsList.
+   albums.appendChild(albumsWrap);
+   todoList.sort
 
 };
 
