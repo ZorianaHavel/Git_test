@@ -1,0 +1,17 @@
+{ 
+    "name": "tom",
+    "year":23, 
+    "surname":true,
+    "gfndjn":null,
+    "vnfn":indefined,
+    "nfn":NAN,
+    "fnvndjn": function
+}
+
+// відправляти дані у форматі JSON і отримувати у форматі JSON.
+// масив даних;
+
+[
+{},
+{},
+] 
