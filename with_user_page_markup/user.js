@@ -1,66 +1,49 @@
 const loadUserInfo = async () => {
     //container
     const containerEl = document.querySelector('.container');
-
+    const userId = Number(new URL(window.location.href).searchParams.get('userId'));
+    const userResponse = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
+    const userData = await userResponse.json();
     //h1
     const titleEl = document.createElement('h1');
     titleEl.classList.add('posts-title');
-    titleEl.innerText = 'Leanne Graham';
+    titleEl.innerText = userData.name;
     containerEl.appendChild(titleEl);
 
-
-   
-
-     //article
+    //article
     const articleEl = document.createElement('article');
     articleEl.classList.add('post_wrap');
     containerEl.appendChild(articleEl);
-
-
-
 
     //pName
     const pTextName = document.createElement('p');
     pTextName.classList.add('post_wrap-text');
     articleEl.appendChild(pTextName);
-    pTextName.innerHTML = '<span>Username:</span> Bret';
-   
-
+    pTextName.innerHTML = `<span>Username:</span> ${userData.name}`;
     //Email
     const pTextEmail = document.createElement('p');
     pTextEmail.classList.add('post_wrap-text');
-    const user = 'Sincere@april.biz';
-    pTextEmail.innerHTML = `<span>Email:</span> <a href="mailto:${user}">${user}</a>`;
+    pTextEmail.innerHTML = `<span>Email:</span> <a href="mailto:${userData.email}">${userData.email}</a>`;
     articleEl.appendChild(pTextEmail);
-    // const pTextEmailS= document.createElement('span');
-    // pTextEmailS.innerText='Email:';
-    // pTextEmail.appendChild(pTextEmailS);
-
-    // const userNameLinkEl = document.createElement('a');
-    // userNameLinkEl.setAttribute('href', `user.html?userId=${userData.id}`);
-
     //Address
     const pTextAddress = document.createElement('p');
     pTextAddress.classList.add('post_wrap-text');
-    const userAd = 'https://www.google.com/maps/search/-37.3159,81.1496';
-    pTextAddress.innerHTML = `<span>Address:</span> <a href=${userAd}>Apt.556, Kulas Light, Gwenborough, 92998-3874</a>`;
+    pTextAddress.innerHTML = `<span>Address:</span> <a href="${userData.address.street}"> ${userData.address.street}</a>`;
     articleEl.appendChild(pTextAddress);
     //Phone
     const pTextPhone = document.createElement('p');
     pTextPhone.classList.add('post_wrap-text');
-    const userPho = 'tel:1-770-736-8031 x56442';
-    pTextPhone.innerHTML = `<span>Phone:</span> <a href=${userPho}>1-770-736-8031 x56442</a>`;
+    pTextPhone.innerHTML = `<span>Phone:</span> <a href="${userData.phone}">${userData.phone}</a>`;
     articleEl.appendChild(pTextPhone);
     //Website
     const pTextWebsite = document.createElement('p');
     pTextWebsite.classList.add('post_wrap-text');
-    const userWeb = 'hildegard.org';
-    pTextWebsite.innerHTML = `<span>Website:</span> <a href=${userWeb}>hildegard.org</a>`;
+    pTextWebsite.innerHTML = `<span>Website:</span> <a href="${userData.website}">${userData.website}</a>`;
     articleEl.appendChild(pTextWebsite);
     //Company
     const pTextCompany = document.createElement('p');
     pTextCompany.classList.add('post_wrap-text');
-    pTextCompany.innerHTML = `<span>Company:</span> Romaguera-Crona`;
+    pTextCompany.innerHTML = `<span>Company:</span> ${userData.company.name}`;
     articleEl.appendChild(pTextCompany);
 
     //todos
@@ -77,7 +60,7 @@ const loadUserInfo = async () => {
     const todoResponse = await fetch('https://jsonplaceholder.typicode.com/todos?userId=1');
     const todoList = await todoResponse.json();
 
-    todoList.sort((todo1,todo2) => Number(todo1.completed) - Number(todo2.completed));
+    todoList.sort((todo1, todo2) => Number(todo1.completed) - Number(todo2.completed));
     todoList.forEach(eltodo => {
         const todoEL = document.createElement('div');
         todoEL.classList.add('todo_wrap');
@@ -116,18 +99,8 @@ const loadUserInfo = async () => {
         albumSpan.innerHTML = albumTitle;
         albumATag.appendChild(albumSpan);
         albumsWrap.appendChild(albumATag);
-         
-
     });
-    albumsList.
-   albums.appendChild(albumsWrap);
-   todoList.sort
-
+    albums.appendChild(albumsWrap);
 };
 
 loadUserInfo();
-
-
-
-
-
