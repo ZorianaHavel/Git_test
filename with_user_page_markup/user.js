@@ -57,9 +57,8 @@ const loadUserInfo = async () => {
     todos.appendChild(todoTitle);
 
 
-    const todoResponse = await fetch('https://jsonplaceholder.typicode.com/todos?userId=1');
+    const todoResponse = await fetch(`https://jsonplaceholder.typicode.com/todos?userId=${userId}`);
     const todoList = await todoResponse.json();
-
     todoList.sort((todo1, todo2) => Number(todo1.completed) - Number(todo2.completed));
     todoList.forEach(eltodo => {
         const todoEL = document.createElement('div');
@@ -70,7 +69,7 @@ const loadUserInfo = async () => {
         todoEL.innerHTML = eltodo.title;
         todos.appendChild(todoEL);
     });
-
+    selectTodo(todos, todoTitle);
     //albums and photo
 
     const albums = document.createElement('div');
@@ -101,6 +100,31 @@ const loadUserInfo = async () => {
         albumsWrap.appendChild(albumATag);
     });
     albums.appendChild(albumsWrap);
+};
+
+selectTodo = (todos, todoTitle) => {
+    const todoList = document.querySelectorAll('.todo_wrap');
+    todoList.forEach(todo => {
+        todo.addEventListener('click', () => {
+            if (todo.classList.contains('completed')) {
+                todo.classList.remove('completed');
+            } else {
+                todo.classList.add('completed');
+            }
+            updateTodo(todos, todoTitle, todoList);
+        });
+    });
+} 
+
+updateTodo = (todoHTML, todoTitle, todoList) => {
+    while (todoHTML.lastElementChild) {
+        todoHTML.removeChild(todoHTML.lastElementChild);
+    }
+    todoHTML.appendChild(todoTitle);
+
+    const todoListSorted = [].slice.call(todoList).sort((todo1, todo2) => Number(todo1.classList.contains('completed')) - Number(todo2.classList.contains('completed')));
+
+    todoListSorted.forEach(todo => todoHTML.appendChild(todo));
 };
 
 loadUserInfo();
